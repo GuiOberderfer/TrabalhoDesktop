@@ -79,15 +79,75 @@ class Poligonal
 
         var angFinal = new Angulo();
         
-        if (estacao.Deflexao == 'D')
+        switch (estacao.Deflexao)
         {
-            angFinal.Segundos = estacao.Azimute.Segundos + estacao.AngEstacao.Segundos;
+            case 'D':
+                CalculoDeflexaoD(estacao, angFinal);
+                break;
+            case 'E':
+                CalculoDeflexaoE(estacao, angFinal);
+                break;
+        }
+        return angFinal;
+    }
 
-            if (angFinal.Segundos > 60)
-            {
-                angFinal.Minutos = 1 + estacao.Azimute.Minutos + estacao.AngEstacao.Minutos;
-                angFinal.Segundos -= 60;
-            } 
+    private static void CalculoDeflexaoE(Estacao estacao, Angulo angFinal)
+    {
+        angFinal.Segundos = estacao.Azimute.Segundos - estacao.AngEstacao.Segundos;
+
+        if (angFinal.Segundos < 0)
+        {
+            angFinal.Minutos = estacao.Azimute.Minutos + estacao.AngEstacao.Minutos - 1;
+            angFinal.Minutos += 60;
+        }
+        else
+        {
+            angFinal.Minutos = estacao.Azimute.Minutos - estacao.AngEstacao.Minutos;
+        }
+
+        if (angFinal.Minutos < 0)
+        {
+            angFinal.Graus = estacao.Azimute.Graus - estacao.AngEstacao.Graus - 1;
+            angFinal.Minutos += 60;
+        }
+        else
+        {
+            angFinal.Graus = estacao.Azimute.Graus - estacao.AngEstacao.Graus;
+        }
+
+        if (angFinal.Graus < 0)
+        {
+            angFinal.Graus += 360;
+        }
+    }
+
+    private static void CalculoDeflexaoD(Estacao estacao, Angulo angFinal)
+    {
+        angFinal.Segundos = estacao.Azimute.Segundos + estacao.AngEstacao.Segundos;
+
+        if (angFinal.Segundos > 60)
+        {
+            angFinal.Minutos = 1 + estacao.Azimute.Minutos + estacao.AngEstacao.Minutos;
+            angFinal.Segundos -= 60;
+        }
+        else
+        {
+            angFinal.Minutos = 1 + estacao.Azimute.Minutos + estacao.AngEstacao.Minutos;
+        }
+
+        if (angFinal.Minutos > 60)
+        {
+            angFinal.Graus = 1 + estacao.Azimute.Minutos + estacao.AngEstacao.Minutos;
+            angFinal.Minutos -= 60;
+        }
+        else
+        {
+            angFinal.Graus = estacao.Azimute.Graus + estacao.AngEstacao.Graus;
+        }
+
+        if (angFinal.Graus > 359)
+        {
+            angFinal.Graus -= 360;
         }
     }
 
