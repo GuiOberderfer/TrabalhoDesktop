@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using angulo;
-using estacao;
-
+﻿namespace Projeto;
 
 class Poligonal
 {
@@ -48,11 +44,127 @@ class Poligonal
 
     public void Listar()
     {
+        Console.Clear();
+        ImprimeHeader();
+        Console.WriteLine($"Poligonal: {Descricao}");
+        Console.WriteLine("———————————————————————————————————————————————————————————————————————————————————————————-");
+        Console.WriteLine("Estação       Ângulo lido       Deflexão       Distância(m)       Azimute");
+        Console.WriteLine("============================================================================================");
+        
+        int estacaoNumero = 1;
+        foreach (Estacao estacao in Estacoes)
+        {
+            Console.WriteLine($"{estacaoNumero:D4} {estacao.AngEstacao} {estacao.Deflexao} {estacao.Distancia:F2} {estacao.Azimute}");
+            estacaoNumero++;
+        }
+
+        Console.WriteLine("============================================================================================");
+
+        float perimetro = Perimetro();
+        int paginaAtual = 1;
+        int totalPaginas = 1; 
+
+        Console.WriteLine($"Perímetro: {perimetro:F2} metros                                                        Pag.: {paginaAtual:D2} de {totalPaginas:D2}");
+        ImprimeFooter();
+
+        ExecutaComandosListar();
+    }
+
+    public Angulo CalcularAzimutes(Estacao? estacao)
+    {
+        if (estacao == null)
+        { 
+            return new Angulo(AzGraus, AzMinutos, AzSegundos);
+        }
+
+        var angFinal = new Angulo();
+        
+        if (estacao.Deflexao == 'D')
+        {
+            angFinal.Segundos = estacao.Azimute.Segundos + estacao.AngEstacao.Segundos;
+
+            if (angFinal.Segundos > 60)
+            {
+                angFinal.Minutos = 1 + estacao.Azimute.Minutos + estacao.AngEstacao.Minutos;
+                angFinal.Segundos -= 60;
+            } 
+        }
+    }
+
+    private void ExecutaComandosListar()
+    {
+        while (true)
+        {
+            var tecla = Console.ReadKey(true);
+
+            switch (tecla.Key)
+            {
+                case ConsoleKey.Escape:
+                {
+                    Environment.Exit(0);
+                    break;
+                }
+
+                case ConsoleKey.F1:
+                {
+                    Inserir();
+                    break;
+                }
+
+                case ConsoleKey.F2:
+                {
+                    Editar();
+                    break;
+                }
+
+                case ConsoleKey.F3:
+                {
+                    Excluir();
+                    break;
+                }
+
+                case ConsoleKey.PageDown:
+                {
+                    //todo prevpageListar
+                    break;
+                }
+
+                case ConsoleKey.PageUp:
+                {
+                    //todo nextpageListar
+                    break;
+                }
+
+                case ConsoleKey.S:
+                {
+                    if (tecla.Modifiers.HasFlag(ConsoleModifiers.Control))
+                    {
+                        SalvarLista();
+                    }
+                    break;
+                }
+
+                default:
+                    continue;
+            }
+            
+            Listar();
+        }
+    }
+
+    private void SalvarLista()
+    {
         
     }
 
-    public void CalcularAzimutes()
+    private void ImprimeHeader()
     {
- 
+        Console.WriteLine("Engenharia Cartográfica             Sistema de Poligonais                   Data: " + DateTime.Now.ToString("dd/MM/yyyy"));
+        Console.WriteLine("============================================================================================");
+    }
+
+    private void ImprimeFooter()
+    {
+        Console.WriteLine("<Esc> Sair <F1> Inserir <F2> Alterar <F3> Excluir <PgDn> <PgUp>");
     }
 }

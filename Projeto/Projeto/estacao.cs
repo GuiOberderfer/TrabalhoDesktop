@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace estacao;
-using angulo;
+namespace Projeto;
 
 class Estacao
 {
