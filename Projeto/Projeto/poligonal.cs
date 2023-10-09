@@ -54,7 +54,7 @@ class Poligonal
         int estacaoNumero = 1;
         foreach (Estacao estacao in Estacoes)
         {
-            Console.WriteLine($"{estacaoNumero:D4} {estacao.AngEstacao} {estacao.Deflexao} {estacao.Distancia:F2} {estacao.Azimute}");
+            Console.WriteLine($"{estacaoNumero:D4}".PadRight(14) + $"{estacao.AngEstacao}".PadRight(18) + $"{estacao.Deflexao} {estacao.Distancia:F2} {estacao.Azimute}");
             estacaoNumero++;
         }
 
@@ -69,10 +69,10 @@ class Poligonal
 
         ExecutaComandosListar();
     }
-
-    public Angulo CalcularAzimutes(Estacao? estacao)
+    
+    public Angulo CalcularAzimutes(Estacao? estacao = null, Angulo? azimuteAnterior = null)
     {
-        if (estacao == null)
+        if (azimuteAnterior == null || Estacoes.Count == 1)
         { 
             return new Angulo(AzGraus, AzMinutos, AzSegundos);
         }
@@ -82,37 +82,37 @@ class Poligonal
         switch (estacao.Deflexao)
         {
             case 'D':
-                CalculoDeflexaoD(estacao, angFinal);
+                CalculoDeflexaoD(estacao, angFinal, azimuteAnterior);
                 break;
             case 'E':
-                CalculoDeflexaoE(estacao, angFinal);
+                CalculoDeflexaoE(estacao, angFinal, azimuteAnterior);
                 break;
         }
         return angFinal;
     }
 
-    private static void CalculoDeflexaoE(Estacao estacao, Angulo angFinal)
+    private static void CalculoDeflexaoE(Estacao estacao, Angulo angFinal, Angulo azimuteAnterior)
     {
-        angFinal.Segundos = estacao.Azimute.Segundos - estacao.AngEstacao.Segundos;
+        angFinal.Segundos = azimuteAnterior.Segundos - estacao.AngEstacao.Segundos;
 
         if (angFinal.Segundos < 0)
         {
-            angFinal.Minutos = estacao.Azimute.Minutos + estacao.AngEstacao.Minutos - 1;
+            angFinal.Minutos = azimuteAnterior.Minutos + estacao.AngEstacao.Minutos - 1;
             angFinal.Minutos += 60;
         }
         else
         {
-            angFinal.Minutos = estacao.Azimute.Minutos - estacao.AngEstacao.Minutos;
+            angFinal.Minutos = azimuteAnterior.Minutos - estacao.AngEstacao.Minutos;
         }
 
         if (angFinal.Minutos < 0)
         {
-            angFinal.Graus = estacao.Azimute.Graus - estacao.AngEstacao.Graus - 1;
+            angFinal.Graus = azimuteAnterior.Graus - estacao.AngEstacao.Graus - 1;
             angFinal.Minutos += 60;
         }
         else
         {
-            angFinal.Graus = estacao.Azimute.Graus - estacao.AngEstacao.Graus;
+            angFinal.Graus = azimuteAnterior.Graus - estacao.AngEstacao.Graus;
         }
 
         if (angFinal.Graus < 0)
@@ -121,28 +121,28 @@ class Poligonal
         }
     }
 
-    private static void CalculoDeflexaoD(Estacao estacao, Angulo angFinal)
+    private static void CalculoDeflexaoD(Estacao estacao, Angulo angFinal, Angulo azimuteAnterior)
     {
-        angFinal.Segundos = estacao.Azimute.Segundos + estacao.AngEstacao.Segundos;
+        angFinal.Segundos = azimuteAnterior.Segundos + estacao.AngEstacao.Segundos;
 
         if (angFinal.Segundos > 60)
         {
-            angFinal.Minutos = 1 + estacao.Azimute.Minutos + estacao.AngEstacao.Minutos;
+            angFinal.Minutos = 1 + azimuteAnterior.Minutos + estacao.AngEstacao.Minutos;
             angFinal.Segundos -= 60;
         }
         else
         {
-            angFinal.Minutos = 1 + estacao.Azimute.Minutos + estacao.AngEstacao.Minutos;
+            angFinal.Minutos = 1 + azimuteAnterior.Minutos + estacao.AngEstacao.Minutos;
         }
 
         if (angFinal.Minutos > 60)
         {
-            angFinal.Graus = 1 + estacao.Azimute.Minutos + estacao.AngEstacao.Minutos;
+            angFinal.Graus = 1 + azimuteAnterior.Minutos + estacao.AngEstacao.Minutos;
             angFinal.Minutos -= 60;
         }
         else
         {
-            angFinal.Graus = estacao.Azimute.Graus + estacao.AngEstacao.Graus;
+            angFinal.Graus = azimuteAnterior.Graus + estacao.AngEstacao.Graus;
         }
 
         if (angFinal.Graus > 359)
