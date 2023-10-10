@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace angulo;
+namespace Projeto;
 
 public class Angulo
 {
@@ -14,6 +14,8 @@ public class Angulo
         this.Minutos = minutos;
         this.Segundos = segundos;
     }
+
+    public Angulo() { }
 
     public override string ToString()
     {
