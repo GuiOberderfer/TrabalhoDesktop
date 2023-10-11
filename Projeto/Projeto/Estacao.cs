@@ -6,9 +6,16 @@ public class Estacao
   {
     AngEstacao = new Angulo();
   }
+  
+  public Estacao(Angulo angEstacao, float distancia, char deflexao)
+  {
+    AngEstacao = angEstacao;
+    Distancia = distancia;
+    Deflexao = deflexao;
+  }
 
   public Angulo AngEstacao { get; set; }
-  public Angulo Azimute { get; set; }
+  public Angulo? Azimute { get; set; }
   public float Distancia { get; set; }
   public char Deflexao { get; set; }
 
