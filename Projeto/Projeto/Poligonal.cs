@@ -250,7 +250,7 @@ public partial class Poligonal
       // Escreve os dados das estações nas linhas subsequentes
       foreach (var estacao in Estacoes)
       {
-        sw.WriteLine(estacao.stringParaImpressao(i));
+        sw.WriteLine(estacao.StringParaImpressao(i));
         i++;
       }
     }
