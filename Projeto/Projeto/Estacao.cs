@@ -16,4 +16,9 @@ public class Estacao
   {
     return $"{AngEstacao} - {Distancia} - {Deflexao}";
   }
+
+  public string StringParaImpressao(int index)
+  {
+    return $"{index:D4};{AngEstacao};{Deflexao};{Distancia};{Azimute}";
+  }
 }
