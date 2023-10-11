@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dpt TI\\source\\repos\\Projeto\\Projeto\\Projeto.csproj": {}
+    "/home/dorio/dev/utfpr/PD/Projeto/Projeto/Projeto.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dpt TI\\source\\repos\\Projeto\\Projeto\\Projeto.csproj": {
+    "/home/dorio/dev/utfpr/PD/Projeto/Projeto/Projeto.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dpt TI\\source\\repos\\Projeto\\Projeto\\Projeto.csproj",
+        "projectUniqueName": "/home/dorio/dev/utfpr/PD/Projeto/Projeto/Projeto.csproj",
         "projectName": "Projeto",
-        "projectPath": "C:\\Users\\Dpt TI\\source\\repos\\Projeto\\Projeto\\Projeto.csproj",
-        "packagesPath": "C:\\Users\\Dpt TI\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dpt TI\\source\\repos\\Projeto\\Projeto\\obj\\",
+        "projectPath": "/home/dorio/dev/utfpr/PD/Projeto/Projeto/Projeto.csproj",
+        "packagesPath": "/home/dorio/.nuget/packages/",
+        "outputPath": "/home/dorio/dev/utfpr/PD/Projeto/Projeto/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Dpt TI\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/dorio/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -50,12 +48,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.22, 6.0.22]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[6.0.22, 6.0.22]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.22, 6.0.22]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.111/RuntimeIdentifierGraph.json"
         }
       }
     }
