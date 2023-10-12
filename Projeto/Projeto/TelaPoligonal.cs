@@ -16,7 +16,8 @@ public partial class Poligonal
       
       int estacaoNum = 1;
       foreach (var estacao in Estacoes)
-      {
+      {   
+          CalcAzimute(estacao);
           Console.WriteLine($"{estacaoNum:D4}\t{estacao.AngEstacao}\t{estacao.Deflexao}\t{estacao.Distancia}\t{estacao.Azimute}");
           estacaoNum++;
       }
