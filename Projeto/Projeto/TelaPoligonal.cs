@@ -3,7 +3,7 @@ namespace Projeto;
 public partial class Poligonal
 {
   public int pagina { get; set; } = 0;
-  private int itensPorPagina = 5;
+  private int itensPorPagina = 10;
 
   void proximaPagina()
   {
@@ -32,10 +32,10 @@ public partial class Poligonal
     var teto = pagina * itensPorPagina + itensPorPagina > Estacoes.ToArray().Length
         ? Estacoes.ToArray().Length - (pagina * itensPorPagina)
         : itensPorPagina;
+
     for (int i = pagina * itensPorPagina; i < pagina * itensPorPagina + teto; i++)
     {
       var estacao = Estacoes[i];
-      CalcAzimute(Estacoes[i]);
       Console.WriteLine($"{i + 1:D4}         {estacao.AngEstacao,-14:F2}     {estacao.Deflexao,-14:F2}   {estacao.Distancia,-14:F2}     {estacao.Azimute,-14:F2}");
     }
 
