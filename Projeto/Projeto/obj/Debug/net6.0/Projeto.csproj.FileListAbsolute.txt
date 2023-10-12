@@ -27,3 +27,17 @@ C:/Users/Dpt TI/source/repos/Projeto/Projeto/obj/Debug/net6.0/ref/Projeto.dll
 /home/dorio/dev/utfpr/PD/Projeto/Projeto/obj/Debug/net6.0/Projeto.pdb
 /home/dorio/dev/utfpr/PD/Projeto/Projeto/obj/Debug/net6.0/Projeto.genruntimeconfig.cache
 /home/dorio/dev/utfpr/PD/Projeto/Projeto/obj/Debug/net6.0/ref/Projeto.dll
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\bin\Debug\net6.0\Projeto.exe
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\bin\Debug\net6.0\Projeto.deps.json
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\bin\Debug\net6.0\Projeto.runtimeconfig.json
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\bin\Debug\net6.0\Projeto.dll
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\bin\Debug\net6.0\Projeto.pdb
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\obj\Debug\net6.0\Projeto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\obj\Debug\net6.0\Projeto.AssemblyInfoInputs.cache
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\obj\Debug\net6.0\Projeto.AssemblyInfo.cs
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\obj\Debug\net6.0\Projeto.csproj.CoreCompileInputs.cache
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\obj\Debug\net6.0\Projeto.dll
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\obj\Debug\net6.0\refint\Projeto.dll
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\obj\Debug\net6.0\Projeto.pdb
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\obj\Debug\net6.0\Projeto.genruntimeconfig.cache
+C:\Users\rodiz\RiderProjects\TrabalhoDesktop\Projeto\Projeto\obj\Debug\net6.0\ref\Projeto.dll

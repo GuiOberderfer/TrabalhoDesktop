@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fex7hRJNmJ5phj9r3Buz2QbEf6rPRgCBZnc5THzXSKupSzIqaSqDnNjfco+FJq4Q/lF1LW5EaUM7uH6t/1b5aQ==",
+  "dgSpecHash": "mJjqp18eBBU8sLfG5fR0dKdTsdvuy5n88PqNW65Fe0SAAvxXczXlpwL8C49+eC8OCiMETTK3V+CsJuosZ2I2gw==",
   "success": true,
-  "projectFilePath": "/home/dorio/dev/utfpr/PD/Projeto/Projeto/Projeto.csproj",
-  "expectedPackageFiles": [
-    "/home/dorio/.nuget/packages/microsoft.netcore.app.ref/6.0.22/microsoft.netcore.app.ref.6.0.22.nupkg.sha512",
-    "/home/dorio/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.22/microsoft.aspnetcore.app.ref.6.0.22.nupkg.sha512",
-    "/home/dorio/.nuget/packages/microsoft.netcore.app.host.linux-x64/6.0.22/microsoft.netcore.app.host.linux-x64.6.0.22.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\rodiz\\RiderProjects\\TrabalhoDesktop\\Projeto\\Projeto\\Projeto.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
