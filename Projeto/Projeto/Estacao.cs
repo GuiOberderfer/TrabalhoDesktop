@@ -6,7 +6,7 @@ public class Estacao
   {
     AngEstacao = new Angulo();
   }
-  
+
   public Estacao(Angulo angEstacao, float distancia, char deflexao)
   {
     AngEstacao = angEstacao;
@@ -26,6 +26,6 @@ public class Estacao
 
   public string StringParaImpressao(int index)
   {
-    return $"{index:D4};{AngEstacao};{Deflexao};{Distancia};{Azimute}";
+    return $"{index:D4};{AngEstacao};{Deflexao};{Distancia};{Azimute};";
   }
 }

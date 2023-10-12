@@ -106,10 +106,10 @@ public partial class Poligonal
   }
 
   public void Inserir()
-    {
-        Console.Clear();
-        Console.WriteLine("Inserir Nova Estação");
-        Estacao novaEstacao = new Estacao();
+  {
+    Console.Clear();
+    Console.WriteLine("Inserir Nova Estação");
+    Estacao novaEstacao = new Estacao();
 
         Console.Write("Ângulo da Estação (Graus): ");
         novaEstacao.AngEstacao.Graus = ValidaEntradaGraus();
@@ -120,24 +120,32 @@ public partial class Poligonal
         Console.Write("Ângulo da Estação (Segundos): ");
         novaEstacao.AngEstacao.Segundos = ValidaEntradaMinutoESegundo();
 
-        Console.Write("Distância (metros): ");
-        // todo validar limites float (dígito)
-        novaEstacao.Distancia = float.Parse(Console.ReadLine());
+    Console.Write("Distância (metros): ");
+    // todo validar limites float (dígito)
+    bool metrosValidos = false;
+    float metros = 0;
+    do
+    {
+      metrosValidos = float.TryParse(Console.ReadLine(), out metros);
+      if (metros < 0) metrosValidos = false;
+      if (!metrosValidos) Console.WriteLine("Distancia inválida. Tente novamente.");
+    } while (!metrosValidos);
+    novaEstacao.Distancia = metros;
 
-        while (true)
-        {
-            Console.Write("Deflexão ('D' ou 'E'): ");
-            char deflexao = char.Parse(Console.ReadLine());
-            if (char.ToUpper(deflexao) == 'D' || char.ToUpper(deflexao) == 'E')
-            {
-                novaEstacao.Deflexao = char.ToUpper(deflexao); 
-                break; 
-            }
-            else
-            {
-                Console.WriteLine("Por favor, unsira uma Deflexão válida.");
-            }
-        }
+    while (true)
+    {
+      Console.Write("Deflexão ('D' ou 'E'): ");
+      char deflexao = char.Parse(Console.ReadLine());
+      if (char.ToUpper(deflexao) == 'D' || char.ToUpper(deflexao) == 'E')
+      {
+        novaEstacao.Deflexao = char.ToUpper(deflexao);
+        break;
+      }
+      else
+      {
+        Console.WriteLine("Por favor, unsira uma Deflexão válida.");
+      }
+    }
 
         Estacoes.Add(novaEstacao);
     }
@@ -249,6 +257,10 @@ public partial class Poligonal
     ConsoleKeyInfo key;
     do
     {
+      foreach (var estacao in Estacoes)
+      {
+        CalcAzimute(estacao);
+      }
       ImprimeTelaListar();
 
       key = Console.ReadKey();
@@ -287,12 +299,11 @@ public partial class Poligonal
     //todo validar limites nome (caracteres especiais/arquivo já existe)
     Console.Write("Nome do arquivo para salvar os dados: ");
     string nomeArquivo = Console.ReadLine();
-
     using (StreamWriter sw = new StreamWriter(nomeArquivo + ".csv"))
     {
       // Escreve os dados da Poligonal na primeira linha
       sw.WriteLine(this.ToString());
-      sw.WriteLine("Estação;Ângulo lido;Deflexão;Distância(m);Azimute");
+      sw.WriteLine("Estação;Ângulo lido;Deflexão;Distância(m);Azimute;");
       var i = 0;
       // Escreve os dados das estações nas linhas subsequentes
       foreach (var estacao in Estacoes)
