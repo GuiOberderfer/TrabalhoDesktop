@@ -41,7 +41,8 @@ public partial class Poligonal
 
     Console.WriteLine("======================================================================================");
     Console.WriteLine($"Perímetro: {Perimetro():F2} metros");
+    Console.WriteLine($"Pagina {pagina + 1} de {Math.Ceiling((float)Estacoes.ToArray().Length / itensPorPagina)}");
     Console.WriteLine(
-        "Pressione <Esc> para Sair | <F1> Inserir | <F2> Alterar | <F3> Excluir | <CTRL + S> Salvar | <PgDn> | <PgUp>");
+        "Pressione <Esc> para Sair | <F1> Inserir | <F2> Alterar | <F3> Excluir | <CTRL + S> Salvar | <PgDn> Proxima pagina | <PgUp> Pagina anterior");
   }
 }
