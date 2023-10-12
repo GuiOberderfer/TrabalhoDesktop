@@ -112,16 +112,13 @@ public partial class Poligonal
     Estacao novaEstacao = new Estacao();
 
     Console.Write("Ângulo da Estação (Graus): ");
-    // todo validar limites graus (0-359/dígito)
-    novaEstacao.AngEstacao.Graus = int.Parse(Console.ReadLine());
+    novaEstacao.AngEstacao.Graus = ValidaEntradaGraus();
 
     Console.Write("Ângulo da Estação (Minutos): ");
-    // todo validar limites minuto e segundo (0-59/digito)
-    novaEstacao.AngEstacao.Minutos = int.Parse(Console.ReadLine());
+    novaEstacao.AngEstacao.Minutos = ValidaEntradaMinutoESegundo();
 
     Console.Write("Ângulo da Estação (Segundos): ");
-    // todo idem
-    novaEstacao.AngEstacao.Segundos = int.Parse(Console.ReadLine());
+    novaEstacao.AngEstacao.Segundos = ValidaEntradaMinutoESegundo();
 
     Console.Write("Distância (metros): ");
     // todo validar limites float (dígito)
@@ -151,6 +148,26 @@ public partial class Poligonal
     }
 
     Estacoes.Add(novaEstacao);
+  }
+  
+  private int ValidaEntradaGraus()
+  {
+    while (true)
+    {
+      var e = Console.ReadLine();
+      if (int.TryParse(e, out var n) && n is >= 0 and < 360) return n;
+      Console.WriteLine("Por favor, insira um inteiro de 0 a 359");
+    }
+  }
+
+  private int ValidaEntradaMinutoESegundo()
+  {
+    while (true)
+    {
+      var e = Console.ReadLine();
+      if (int.TryParse(e, out var n) && n is >= 0 and < 59) return n;
+      Console.WriteLine("Por favor, insira um inteiro de 0 a 59");
+    }
   }
   public void Editar()
   {
