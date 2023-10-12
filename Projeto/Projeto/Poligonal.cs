@@ -125,7 +125,15 @@ public partial class Poligonal
 
     Console.Write("Distância (metros): ");
     // todo validar limites float (dígito)
-    novaEstacao.Distancia = float.Parse(Console.ReadLine());
+    bool metrosValidos = false;
+    float metros = 0;
+    do
+    {
+      metrosValidos = float.TryParse(Console.ReadLine(), out metros);
+      if (metros < 0) metrosValidos = false;
+      if (!metrosValidos) Console.WriteLine("Distancia inválida. Tente novamente.");
+    } while (!metrosValidos);
+    novaEstacao.Distancia = metros;
 
     while (true)
     {
