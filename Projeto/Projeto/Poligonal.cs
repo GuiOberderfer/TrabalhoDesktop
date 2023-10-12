@@ -22,13 +22,13 @@ public partial class Poligonal
   {
     return Estacoes.Sum(estacao => estacao.Distancia);
   }
-  
+
   public void CalcAzimute(Estacao estacao)
   //todo ajustar calculo azimute que possui um erro
   {
     if (estacao.Azimute != null)
     {
-      return; 
+      return;
     }
 
     if (_coordenadaAtual == null)
@@ -37,7 +37,7 @@ public partial class Poligonal
       _coordenadaAtual = estacao.Azimute;
       return;
     }
-    
+
     int segundos = _coordenadaAtual.Segundos;
     int minutos = _coordenadaAtual.Minutos;
     int graus = _coordenadaAtual.Graus;
@@ -253,15 +253,15 @@ public partial class Poligonal
           }
           break;
         case ConsoleKey.PageDown:
-          //todo voltar paginação
+          paginaAnterior();
           break;
         case ConsoleKey.PageUp:
-          //todo avançar paginação
+          proximaPagina();
           break;
       }
     } while (key.Key != ConsoleKey.Escape);
   }
-  
+
   private void SalvarDados()
   {
     //todo validar limites nome (caracteres especiais/arquivo já existe)
