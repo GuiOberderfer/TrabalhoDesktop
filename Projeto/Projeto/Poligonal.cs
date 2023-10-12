@@ -106,29 +106,44 @@ public partial class Poligonal
   }
 
   public void Inserir()
-  {
-    Console.Clear();
-    Console.WriteLine("Inserir Nova Estação");
-    Estacao novaEstacao = new Estacao();
+    {
+        Console.Clear();
+        Console.WriteLine("Inserir Nova Estação");
+        Estacao novaEstacao = new Estacao();
 
-    Console.Write("Ângulo da Estação (Graus): ");
-    //todo validar limites graus (0-359/dígito)
-    novaEstacao.AngEstacao.Graus = int.Parse(Console.ReadLine());
-    //todo validar limites minuto e segundo (0-59/digito)
-    Console.Write("Ângulo da Estação (Minutos): ");
-    novaEstacao.AngEstacao.Minutos = int.Parse(Console.ReadLine());
-    //todo idem
-    Console.Write("Ângulo da Estação (Segundos): ");
-    novaEstacao.AngEstacao.Segundos = int.Parse(Console.ReadLine());
-    //todo validar limites float (dígito)
-    Console.Write("Distância (metros): ");
-    novaEstacao.Distancia = float.Parse(Console.ReadLine());
-    //todo validar se resultado desvia das opções/lowercase
-    Console.Write("Deflexão ('D' ou 'E'): ");
-    novaEstacao.Deflexao = char.Parse(Console.ReadLine());
-    Estacoes.Add(novaEstacao);
-  }
+        Console.Write("Ângulo da Estação (Graus): ");
+        // todo validar limites graus (0-359/dígito)
+        novaEstacao.AngEstacao.Graus = int.Parse(Console.ReadLine());
 
+        Console.Write("Ângulo da Estação (Minutos): ");
+        // todo validar limites minuto e segundo (0-59/digito)
+        novaEstacao.AngEstacao.Minutos = int.Parse(Console.ReadLine());
+
+        Console.Write("Ângulo da Estação (Segundos): ");
+        // todo idem
+        novaEstacao.AngEstacao.Segundos = int.Parse(Console.ReadLine());
+
+        Console.Write("Distância (metros): ");
+        // todo validar limites float (dígito)
+        novaEstacao.Distancia = float.Parse(Console.ReadLine());
+
+        while (true)
+        {
+            Console.Write("Deflexão ('D' ou 'E'): ");
+            char deflexao = char.Parse(Console.ReadLine());
+            if (char.ToUpper(deflexao) == 'D' || char.ToUpper(deflexao) == 'E')
+            {
+                novaEstacao.Deflexao = char.ToUpper(deflexao); 
+                break; 
+            }
+            else
+            {
+                Console.WriteLine("Por favor, unsira uma Deflexão válida.");
+            }
+        }
+
+        Estacoes.Add(novaEstacao);
+    }
   public void Editar()
   {
     Console.Clear();
