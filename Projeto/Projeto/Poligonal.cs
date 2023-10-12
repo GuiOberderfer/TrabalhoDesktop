@@ -2,11 +2,12 @@
 
 public partial class Poligonal
 {
-  public string Descricao { get; set; }
-  public int AzGraus { get; set; }
-  public int AzMinutos { get; set; }
-  public int AzSegundos { get; set; }
+  private string Descricao { get; set; }
+  private int AzGraus { get; set; }
+  private int AzMinutos { get; set; }
+  private int AzSegundos { get; set; }
   public List<Estacao> Estacoes { get; set; }
+  private Angulo? _coordenadaAtual;
 
   public Poligonal(string descricao, int azGraus, int azMinutos, int azSegundos)
   {
@@ -17,80 +18,91 @@ public partial class Poligonal
     Estacoes = new List<Estacao>();
   }
 
-  public float Perimetro()
+  private float Perimetro()
   {
-    float perimetro = 0;
-    Angulo azimuteInicial = new Angulo { Graus = AzGraus, Minutos = AzMinutos, Segundos = AzSegundos };
-
-    foreach (var estacao in Estacoes)
-    {
-      perimetro += estacao.Distancia;
-      CalcAzimute(estacao, azimuteInicial);
-      azimuteInicial = estacao.Azimute;
-    }
-
-    return perimetro;
+    return Estacoes.Sum(estacao => estacao.Distancia);
   }
-
-  public void CalcAzimute(Estacao estacao, Angulo azimuteInicial)
+  
+  public void CalcAzimute(Estacao estacao)
   //todo ajustar calculo azimute que possui um erro
   {
-    if (Estacoes.Count == 0)
+    if (estacao.Azimute != null)
     {
-      estacao.Azimute = new Angulo { Graus = AzGraus, Minutos = AzMinutos, Segundos = AzSegundos };
-      return;
+      return; 
     }
 
-    int segundos = azimuteInicial.Segundos;
-    int minutos = azimuteInicial.Minutos;
-    int graus = azimuteInicial.Graus;
+    if (_coordenadaAtual == null)
+    {
+      estacao.Azimute = new Angulo(AzGraus, AzMinutos, AzSegundos);
+      _coordenadaAtual = estacao.Azimute;
+      return;
+    }
+    
+    int segundos = _coordenadaAtual.Segundos;
+    int minutos = _coordenadaAtual.Minutos;
+    int graus = _coordenadaAtual.Graus;
 
     if (estacao.Deflexao == 'D')
     {
-      segundos += estacao.AngEstacao.Segundos;
-      if (segundos >= 60)
-      {
-        minutos += 1;
-        segundos -= 60;
-      }
-
-      minutos += estacao.AngEstacao.Minutos;
-      if (minutos >= 60)
-      {
-        graus += 1;
-        minutos -= 60;
-      }
-
-      graus += estacao.AngEstacao.Graus;
-      if (graus >= 360)
-      {
-        graus -= 360;
-      }
+      segundos = calculoDeflexaoADireita(estacao, segundos, ref minutos, ref graus);
     }
     else
     {
-      segundos -= estacao.AngEstacao.Segundos;
-      if (segundos < 0)
-      {
-        minutos -= 1;
-        segundos += 60;
-      }
-
-      minutos -= estacao.AngEstacao.Minutos;
-      if (minutos < 0)
-      {
-        graus -= 1;
-        minutos += 60;
-      }
-
-      graus -= estacao.AngEstacao.Graus;
-      if (graus < 0)
-      {
-        graus += 360;
-      }
+      segundos = CalculoDeflexaoAEsquerda(estacao, segundos, ref minutos, ref graus);
     }
 
     estacao.Azimute = new Angulo { Graus = graus, Minutos = minutos, Segundos = segundos };
+    _coordenadaAtual = estacao.Azimute;
+  }
+
+  private static int CalculoDeflexaoAEsquerda(Estacao estacao, int segundos, ref int minutos, ref int graus)
+  {
+    segundos -= estacao.AngEstacao.Segundos;
+    if (segundos < 0)
+    {
+      minutos -= 1;
+      segundos += 60;
+    }
+
+    minutos -= estacao.AngEstacao.Minutos;
+    if (minutos < 0)
+    {
+      graus -= 1;
+      minutos += 60;
+    }
+
+    graus -= estacao.AngEstacao.Graus;
+    if (graus < 0)
+    {
+      graus += 360;
+    }
+
+    return segundos;
+  }
+
+  private static int calculoDeflexaoADireita(Estacao estacao, int segundos, ref int minutos, ref int graus)
+  {
+    segundos += estacao.AngEstacao.Segundos;
+    if (segundos >= 60)
+    {
+      minutos += 1;
+      segundos -= 60;
+    }
+
+    minutos += estacao.AngEstacao.Minutos;
+    if (minutos >= 60)
+    {
+      graus += 1;
+      minutos -= 60;
+    }
+
+    graus += estacao.AngEstacao.Graus;
+    if (graus >= 360)
+    {
+      graus -= 360;
+    }
+
+    return segundos;
   }
 
   public void Inserir()
